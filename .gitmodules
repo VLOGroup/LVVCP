@@ -1,0 +1,9 @@
+[submodule "Op_pad2d_gh"]
+	path = Op_pad2d_gh
+	url = https://github.com/VLOGroup/Op_pad2d_gh
+[submodule "RAFT_custom"]
+	path = RAFT_custom
+	url = https://github.com/VLOGroup/LVVCP_RAFT_custom.git
+[submodule "Op_sample_cv"]
+	path = Op_sample_cv
+	url = https://github.com/VLOGroup/LVVCP_Op_sample_cv.git

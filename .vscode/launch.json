@@ -1,0 +1,48 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "LVVCP Scooter-gray demo",
+            "type": "python",
+            "request": "launch",
+            "program": "${cwd}/demo_LVVCP.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--cfg_strict_reload=1",  // avoid automatic merging with new cfg, safer but no forward compatibility
+                "--load_path=${cwd}/data_and_model_samples/DAVIS2017_scootergray/res_mm1_ep400/model/mm1__ep400_3Cands12ItersModel.ckpt",
+                "--dataset_path=${cwd}/data_and_model_samples/",
+                "--list_val=${cwd}/data_and_model_samples/DAVIS2017_scootergray/scootergray.txt",
+                "--out_path=out_val/",                
+                "--minimal_output=1",
+                "--filesaver_type=MP",  // MP=multi-processing file saver, std=standard file saver
+            ],
+            "env": {
+                // "CUDA_VISIBLE_DEVICES": "0",
+                // "MATPLOTLIBBACKEND": "Agg",
+            },
+        },
+        {
+            "name": "LVVCP Scooter-gray CUDA sample_cv demo",
+            "type": "python",
+            "request": "launch",
+            "program": "${cwd}/demo_LVVCP.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--cfg_strict_reload=1",  // avoid automatic merging with new cfg, safer but no forward compatibility
+                "--load_path=${cwd}/data_and_model_samples/DAVIS2017_scootergray/res_mm1_ep400_CUDA_Op_sample_cv/model_NHWC_bilin/mm1__ep400_3Cands12ItersModel_NHWC.ckpt",
+                "--dataset_path=${cwd}/data_and_model_samples/",
+                "--list_val=${cwd}/data_and_model_samples/DAVIS2017_scootergray/scootergray.txt",
+                "--out_path=out_val/",                
+                "--minimal_output=1",
+                "--filesaver_type=MP",  // MP=multi-processing file saver, std=standard file saver
+            ],
+            "env": {
+                // "CUDA_VISIBLE_DEVICES": "0",
+                // "MATPLOTLIBBACKEND": "Agg",
+            },
+        }
+    ]
+}

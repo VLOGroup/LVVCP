@@ -1,0 +1,293 @@
+{
+    "D": {
+        "config": {
+            "D_ab_norm": "l2proxVarCandCnt",
+            "D_use_mask": true,
+            "colcand_selectby": "ab",
+            "colcands": "all",
+            "cons_frame2frame": 1,
+            "dataterm_ref_cands": [
+                "glob",
+                "loc",
+                "flow"
+            ],
+            "denoise_mask_hub_eps": 0.01,
+            "denoise_mask_xk_for_grad": "xk",
+            "drop_prev_warp_dataterm_masks_S0": true,
+            "get_energy": true,
+            "hub_eps": 0.01,
+            "init_image": [
+                "flow",
+                "glob",
+                "loc"
+            ],
+            "proj_mask": false,
+            "propagate_energy_multiplied": false,
+            "tau_lambda_cand": {
+                "init": 10,
+                "lr_mul": 500,
+                "max": 1000,
+                "min": 0.0001,
+                "mode": "learned"
+            },
+            "tau_lambda_cand3": {
+                "init": 10,
+                "lr_mul": 500,
+                "max": 1000,
+                "min": 0.0001,
+                "mode": "learned"
+            },
+            "taulambda_colcands": {
+                "init": 0.5,
+                "lr_mul": 500,
+                "max": 1000,
+                "min": 0.0001,
+                "mode": "learned"
+            },
+            "taulambda_mask": {
+                "init": 0.5,
+                "lr_mul": 500,
+                "max": 1000,
+                "min": 0.0001,
+                "mode": "learned"
+            },
+            "use_prox": true,
+            "use_sep_cand_lambdas": true
+        },
+        "get_energy": true,
+        "type": "video_denoise_lab"
+    },
+    "MaskPredictor": {
+        "config": {
+            "act": "tanh",
+            "act_fin": "tanh",
+            "allow_none_mask": true,
+            "bias_in": true,
+            "candbest": "glob",
+            "candbest3": "loc",
+            "cands": [
+                "flow",
+                "glob",
+                "loc"
+            ],
+            "colcand3": true,
+            "efficient": false,
+            "embedding_in_maskcnn": false,
+            "in_channels": 24,
+            "lambda_tdv_mul": true,
+            "multiplier": 1,
+            "no_head": true,
+            "num_features": 32,
+            "num_mb": 1,
+            "num_scales": 3,
+            "out_channels": 9,
+            "seperate_dataterm_mask": true,
+            "use_OOIM": true,
+            "use_confidence_input": true,
+            "use_gray_input": true,
+            "use_warped_prev_energy_est_init_val": {
+                "init": 0.0,
+                "lr_mul": 5,
+                "max": 1,
+                "min": 0,
+                "mode": "learned"
+            },
+            "use_warped_prev_energy_est_input": true,
+            "use_warped_prev_lambda_tdv_mul": true,
+            "use_warped_prev_lambda_tdv_mul_init_val": {
+                "init": 0.0,
+                "lr_mul": 5,
+                "max": 1,
+                "min": 0,
+                "mode": "learned"
+            },
+            "use_warped_prev_mask_init_val": {
+                "init": 0.0,
+                "lr_mul": 5,
+                "max": 1,
+                "min": 0,
+                "mode": "learned"
+            },
+            "use_warped_prev_mask_input": false,
+            "use_warped_prev_matched10_dat_input": true,
+            "use_warped_prev_matched10_img_input": true
+        },
+        "type": "MaskPredictorCnnVar"
+    },
+    "R": {
+        "config": {
+            "act": "tanh",
+            "act_fin": "tanh",
+            "efficient": false,
+            "in_channels": 3,
+            "multiplier": 1,
+            "num_features": 32,
+            "num_mb": 1,
+            "num_scales": 3,
+            "out_channels": 1,
+            "psi": "student-t"
+        },
+        "type": "tdv"
+    },
+    "RaftFlow": {
+        "alternate_corr": false,
+        "fwdbwd": 1,
+        "iters": 12,
+        "mixed_precision": false,
+        "model": "RAFT_custom/models/raft-sintel.pth",
+        "occl_a1": 0.1,
+        "occl_a2": 0.5,
+        "small": false
+    },
+    "S": 12,
+    "S_increase": {
+        "init": 1,
+        "reset_optim": true,
+        "steps": [
+            25,
+            50,
+            75,
+            100,
+            125,
+            150,
+            175,
+            200,
+            225,
+            250,
+            275
+        ]
+    },
+    "T": {
+        "init": 0.01,
+        "lr_mul": 100,
+        "max": 1000,
+        "min": 0.0001,
+        "mode": "learned"
+    },
+    "data": {
+        "AugmentRandomResize": false,
+        "augmentations": "None",
+        "bs_train": 4,
+        "bs_val": 2,
+        "candbest": "conf",
+        "check_exists": true,
+        "colcands_conf_best": true,
+        "colcands_global": true,
+        "colcands_locandglobal": true,
+        "color_mode": "RGBLateLab",
+        "conf_init_eps_f": 1,
+        "conf_init_eps_l": 0.3,
+        "dataset": "VideoCol_FileListHDF5",
+        "flow": true,
+        "flow10": true,
+        "flow12": true,
+        "flowcands": true,
+        "list_train": "lists/davispng_vpncompat_global_train.txt",
+        "list_val": "/workspaces/video_colorization_inference_gh/data/DAVIS2017_scootergray/scootergray.txt",
+        "loader": "std_loader",
+        "matched_mask_gauss_var": 0,
+        "multiframe": "joint",
+        "multiframe_cnt_train": 9,
+        "multiframe_cnt_val": 2,
+        "patch_size": [
+            128,
+            128
+        ],
+        "path": "/workspaces/video_colorization_inference_gh/data/",
+        "pin_memory": true,
+        "shrink_matched_mask_sz": 0,
+        "val_mini_hdf5": [
+            1,
+            11,
+            22
+        ],
+        "workers_train": 4,
+        "workers_val": 2
+    },
+    "deterministic": 1,
+    "feat_match_global": {
+        "backbone": "Classification_VGG16bn",
+        "cand_cnt": 3,
+        "cands": 3,
+        "cmb_confs": 1,
+        "featnorm": [
+            "instance_norm",
+            "NCC_norm",
+            "NCC_0mean"
+        ],
+        "keep_lumiosity": 1,
+        "multi": 1,
+        "sample_cv_op":"samplecv_NHWC",
+        "upsample": "nearest"
+    },
+    "feat_match_local": {
+        "backbone": "Classification_VGG16bn",
+        "cand_cnt": 3,
+        "cands": 3,
+        "cmb_confs": 1,
+        "featnorm": [
+            "instance_norm",
+            "NCC_norm",
+            "NCC_0mean"
+        ],
+        "keep_lumiosity": 1,
+        "multi": 1,
+        "sample_cv_op":"samplecv_NHWC",
+        "upsample": "nearest",
+        "useFlowOfs": true,
+        "wdw_sz": 8
+    },
+    "init_pretrained": "/workspaces/video_colorization_inference_gh/data/DAVIS2017_scootergray/res_mm1_orig_imgs/model/refinement_model_final.ckpt",
+    "multi_configs": [
+        "Adam_OHEMOracleFdetach_noBias_Sinit1_OnlyGrayNoise_505n_Glob_Ftrain9",
+        "Adam_OHEMOracleFdetach_noBias_Sinit1_OnlyGrayNoise_546n_GlobLoc_Ftrain9"
+    ],
+    "pad": 0,
+    "prefix": "cfg_MultiModelSP_Glob_GlobLoc__Ftrain9",
+    "pretrained": "",
+    "taulambda": {
+        "init": 10,
+        "lr_mul": 500,
+        "max": 1000,
+        "min": 0.0001,
+        "mode": "learned"
+    },
+    "train": {
+        "OHEM": 0.25,
+        "OHEM_batchwise": true,
+        "betas": [
+            0.5,
+            0.9
+        ],
+        "deterministic": 1,
+        "epochs": 400,
+        "frame_iteration_detach_model_res": true,
+        "gray_noise_augmentor": {
+            "sigma_max": 0.05,
+            "useLayer": true
+        },
+        "loss_oracle_normalization": true,
+        "loss_oracle_normalization_epsilon": 2.5e-06,
+        "lr": 0.0001,
+        "lr_mul_steps": {
+            "100": 0.5,
+            "200": 0.5,
+            "300": 0.5
+        },
+        "lr_steps": {
+            "100": 0.5,
+            "150": 0.5,
+            "200": 0.5,
+            "250": 0.5,
+            "300": 0.5
+        },
+        "mask_loss": false,
+        "mask_loss_perc": 0,
+        "multiframe": "joint",
+        "multiframe_propagate_mask": 0.5,
+        "normalize_loss": false,
+        "optimizer": "BlockAdam",
+        "update_model_every": [],
+        "verbose": 1
+    }
+}
