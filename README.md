@@ -21,7 +21,7 @@ You will need:
 Once you have the above prerequisites setup **clone the repository recursively**, which ensures that sub-modules are also cloned.
 
   ```bash
-  cd <wordkir>
+  cd <workdir>
   git clone https://github.com/VLOGroup/LVVCP --recursive
   ```
   
@@ -66,7 +66,7 @@ If you use this code please consider citing:
 ```bibtex
 @InProceedings{HofingerKobler22,
   Title     = {Learned Variational Video Color Propagation},
-  Author    = {Hofiger, Markus and Kobler, Erich and Effland, Alexander and Pock, Thomas},
+  Author    = {Hofinger, Markus and Kobler, Erich and Effland, Alexander and Pock, Thomas},
   Booktitle = {Computer Vision -- ECCV 2022. Lecture Notes in Computer Science},
   Year      = {2022}
 }
