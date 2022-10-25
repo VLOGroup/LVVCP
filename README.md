@@ -1,6 +1,6 @@
 # LVVCP - Learned Variational Video Color Propagation
 
-This repostiory contains the code for the work on LVVCP - 'Learned variational video color propagation'
+This repostiory contains the code for the work on LVVCP - 'Learned variational video color propagation' presented at ECCV2022: [paper](https://www.ecva.net/papers/eccv_2022/papers_ECCV/html/4987_ECCV_2022_paper.php), [video](https://www.youtube.com/watch?v=kV38aGKVqOE).
 
 ![assets/LVVCP_Overview.jpg](assets/LVVCP_Overview.jpg)
 
@@ -67,14 +67,15 @@ If you use this code please consider citing:
 @InProceedings{HofingerKobler22,
   Title     = {Learned Variational Video Color Propagation},
   Author    = {Hofinger, Markus and Kobler, Erich and Effland, Alexander and Pock, Thomas},
-  Booktitle = {Computer Vision -- ECCV 2022. Lecture Notes in Computer Science},
+  Booktitle = {Computer Vision -- {ECCV} 2022},
+  Series = {Lecture Notes in Computer Science}
   Year      = {2022}
 }
 
 @InProceedings{KoEf20,
   Title     = {Total Deep Variation for Linear Inverse Problems},
   Author    = {Kobler, Erich and Effland, Alexander and Kunisch, Karl and Pock, Thomas},
-  Booktitle = {IEEE Conference on Computer Vision and Pattern Recognition},
+  Booktitle = {{IEEE} Conference on Computer Vision and Pattern Recognition},
   Year      = {2020}
 }
 ```
