@@ -1,11 +1,12 @@
 # Based on https://github.com/anibali/docker-pytorch/blob/master/dockerfiles/1.7.0-cuda11.0-ubuntu20.04/Dockerfile
-FROM nvidia/cuda:10.1-devel-ubuntu18.04
+#FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
+FROM nvidia/cuda:11.1.1-devel-ubuntu18.04
 
 # # Update to newest Nvidia Keyring
 # RUN  wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-keyring_1.0-1_all.deb \
 #      && dpkg -i cuda-keyring_1.0-1_all.deb 
 User root
-RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub
+RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/3bf863cc.pub
 
 
 # Install some basic utilities
@@ -38,19 +39,21 @@ RUN chmod 777 /home/usr_nopasswd
 ENV CONDA_AUTO_UPDATE_CONDA=false
 ENV PATH=/home/usr_nopasswd/miniconda/bin:$PATH
 
-RUN curl -sLo ~/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-py37_4.9.2-Linux-x86_64.sh \
+RUN curl -sLo ~/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-py37_23.1.0-1-Linux-x86_64.sh \
  && chmod +x ~/miniconda.sh \
  && ~/miniconda.sh -b -p ~/miniconda \
  && rm ~/miniconda.sh \
  && conda clean -ya
 
 
-#  RUN conda update -n base -c defaults conda 
+#  RUN conda update -n base -c defaults conda
+
+RUN conda install -n base conda-libmamba-solver && conda config --set solver libmamba
 
 RUN conda install -y \
-        pytorch=1.7.1 \
-        torchvision \
-        cudatoolkit=10.1 \
+        pytorch=1.8.1 \
+        torchvision=0.9.1 \
+        cudatoolkit=11.1 \
         scipy \
         matplotlib \
         jupyter \
@@ -60,11 +63,12 @@ RUN conda install -y \
         imageio \
         git \
         gitpython \
-        pip \    
+        pip \
         h5py \
         pandas \
         parameterized \
-        -c pytorch   \
+        -c pytorch  \
+        -c nvidia   \
     && pip install imageio_ffmpeg \
     && conda clean -ya 
 
@@ -81,8 +85,9 @@ RUN cd /app \
 
 # Specify the architecture of your GPU here, a list of common GPUs is setup by default, adapt as needed.
 # ENV TORCH_CUDA_ARCH_LIST=Turing
-# ENV TORCH_CUDA_ARCH_LIST="5.2 6.0 6.1 7.0 7.5 8.0 8.6+PTX"
-ENV TORCH_CUDA_ARCH_LIST="6.0 6.1 7.0 7.5"
+#ENV TORCH_CUDA_ARCH_LIST="5.2 6.0 6.1 7.0 7.5 8.0 8.6+PTX"
+#ENV TORCH_CUDA_ARCH_LIST="6.0 6.1 7.0 7.5"
+ENV TORCH_CUDA_ARCH_LIST="8.6"
 
 # Install padding Transpose operator
 RUN cd /app/LVVCP_docker/Op_pad2d_gh/ \
