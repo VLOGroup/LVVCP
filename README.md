@@ -92,3 +92,6 @@ However, please be aware that parts that we use, like RAFT, the VGG or ResNet pa
      - The eval() signal was not passed all the way to the VGGbn backbone (used a list instead of torch.nn.ModuleList), hence the batchnorm was still in training mode.
      - The color candindate sampling for optical flow multiplied out of image tensors with 0, however, correct is to set those pixels to 0.5 (our value for gray and 0 color in Lab)
      
+## Update History:
+  - March 2024, updating docker container to UB22, pt1.13.1, CUDA11.7 and python 3.10 for longer forward compatibilty.
+    A quick test gave similar results.

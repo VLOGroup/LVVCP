@@ -12,7 +12,9 @@ import torchvision.transforms.functional as TF
 from typing import Dict, List, Tuple, Optional
 
 # Required for RandomFlipTH, RandomRotateTH, RandomResizedCropTH to work with flow vectors which are floating point
-assert float(".".join(torch.__version__.split(".")[0:2])) >= 1.7, f"Pytorch Version needs to be >= 1.7 for this dataloader to work. It uses the new functionality to augment tensor objects not only PIL objects. Version found={torch.__version__}"
+maj_verison, min_verison = [int(v) for v in torch.__version__.split(".")[0:2]]
+if maj_verison < 2:
+    assert min_verison >= 7,  f"Pytorch Version needs to be >= 1.7 for this dataloader to work. It uses the new functionality to augment tensor objects not only PIL objects. Version found={torch.__version__}"
 
 def propagate_old_masks(data: Dict[str, torch.Tensor], data_prev: Dict[str, torch.Tensor], matched10_est:Optional[torch.Tensor]=None):
     """ Propagates the old masks to the new frame - if flow is present the masks will be warped"""
